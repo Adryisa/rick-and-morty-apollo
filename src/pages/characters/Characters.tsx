@@ -62,7 +62,6 @@ export function Characters(): JSX.Element {
         topPage={data?.characters.info.pages}
         currentPage={pageIndex}
       />
-      <ul />
     </div>
   );
 }
