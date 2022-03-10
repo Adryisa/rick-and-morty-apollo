@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
+import { CharacterDetails } from '../characterDetails/CharacterDetails';
 
 interface CharacterDataI {
   characters: {
@@ -61,6 +62,23 @@ export function Characters(): JSX.Element {
         prevPage={prevPage}
         currentPage={pageIndex}
       />
+      {loading ? (
+        <img src="/public/assets/loading-rm.png" alt="loading" />
+      ) : (
+        <div>
+          {data && (
+            <ul>
+              {data.characters.results.map((item) => (
+                <CharacterDetails
+                  key={item.id}
+                  name={item.name}
+                  image={item.image}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 }
