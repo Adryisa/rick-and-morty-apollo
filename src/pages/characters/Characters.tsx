@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
-import { CharacterDetails } from '../characterDetails/CharacterDetails';
+import { CharacterCard } from '../../components/cardCharacter/CardCharacter';
 
 interface CharacterDataI {
   characters: {
@@ -25,8 +25,6 @@ const CHARACTER_DATA_QUERY = gql`
     characters(page: $page, filter: $filter) {
       info {
         pages
-        next
-        prev
       }
       results {
         id
@@ -62,20 +60,17 @@ export function Characters(): JSX.Element {
         nextPage={nextPage}
         prevPage={prevPage}
         currentPage={pageIndex}
+        maxPage={data?.characters.info.pages}
       />
       {loading ? (
-        <img src="/public/assets/loading-rm.png" alt="loading" />
+        <img src="assets/loading-rm.png" alt="loading" />
       ) : (
         <div>
           {data && (
             <ul>
               {data.characters.results.map((item) => (
-                <Link to={`character/${item.id}`}>
-                  <CharacterDetails
-                    key={item.id}
-                    name={item.name}
-                    image={item.image}
-                  />
+                <Link to={`character/${item.id}`} key={item.id}>
+                  <CharacterCard name={item.name} image={item.image} />
                 </Link>
               ))}
             </ul>
