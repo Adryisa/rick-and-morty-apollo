@@ -4,11 +4,20 @@ import 'fast-text-encoding/text';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App';
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: 'https://rickandmortyapi.com/graphql',
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ApolloProvider>,
+
   document.getElementById('root')
 );
