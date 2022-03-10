@@ -60,5 +60,8 @@
       "!**/src/index.tsx",
       "!**/src/react-app-env.d.ts"
     ]
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }
