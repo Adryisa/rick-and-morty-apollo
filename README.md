@@ -1,4 +1,4 @@
-# Rick and Morty app using GraphQL <img src='https://www.stickpng.com/es/img/dibujos-animados/rick-y-morty/rick-y-morty'>
+# Rick and Morty app using GraphQL
 
 ## Description
 
@@ -6,7 +6,7 @@ This is an app that fetch data from RickandMortyGraphQL API --> https://rickandm
 
 ### Deployment site
 
---->
+---> https://rickandmorty-app-apollo.netlify.app/
 
 #### The stack
 
