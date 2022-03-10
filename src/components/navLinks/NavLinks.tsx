@@ -8,10 +8,10 @@ export function NavLinks(): JSX.Element {
         <Link to="/*">
           <li>Characters</li>
         </Link>
-        <Link to="/episodes/*">
+        <Link to="/episodes/">
           <li>Episodes</li>
         </Link>
-        <Link to="/locations/*">
+        <Link to="/locations/">
           <li>Locations</li>
         </Link>
       </ul>
