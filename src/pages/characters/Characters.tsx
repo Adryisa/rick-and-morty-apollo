@@ -56,16 +56,15 @@ export function Characters(): JSX.Element {
     <div>
       <h2>Characters</h2>
       {error && <p>Error: data not found</p>}
-      <Buttons
-        nextPage={nextPage}
-        prevPage={prevPage}
-        currentPage={pageIndex}
-        maxPage={data?.characters.info.pages}
-      />
       {loading ? (
         <img src="assets/loading-rm.png" alt="loading" />
       ) : (
         <div>
+          <Buttons
+            nextPage={nextPage}
+            prevPage={prevPage}
+            currentPage={pageIndex}
+          />
           {data && (
             <ul>
               {data.characters.results.map((item) => (
@@ -75,6 +74,11 @@ export function Characters(): JSX.Element {
               ))}
             </ul>
           )}
+          <Buttons
+            nextPage={nextPage}
+            prevPage={prevPage}
+            currentPage={pageIndex}
+          />
         </div>
       )}
     </div>
