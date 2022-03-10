@@ -11,9 +11,8 @@ export function CharacterDetails({
 }: CharacterDetailsPropsI): JSX.Element {
   return (
     <>
-      {' '}
       <li>{name}</li>
-      <li>{image}</li>
+      <img src={image} alt="" />
     </>
   );
 }

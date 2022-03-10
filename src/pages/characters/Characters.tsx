@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
 import { CharacterDetails } from '../characterDetails/CharacterDetails';
 
@@ -69,11 +70,13 @@ export function Characters(): JSX.Element {
           {data && (
             <ul>
               {data.characters.results.map((item) => (
-                <CharacterDetails
-                  key={item.id}
-                  name={item.name}
-                  image={item.image}
-                />
+                <Link to={`character/${item.id}`}>
+                  <CharacterDetails
+                    key={item.id}
+                    name={item.name}
+                    image={item.image}
+                  />
+                </Link>
               ))}
             </ul>
           )}
