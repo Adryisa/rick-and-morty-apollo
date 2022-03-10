@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
@@ -36,13 +36,21 @@ const CHARACTER_DATA_QUERY = gql`
 `;
 
 export function Characters(): JSX.Element {
+  const [searchValue, setSearchValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [pageIndex, setPageIndex] = useState(1);
   const { data, loading, error } = useQuery<CharacterDataI>(
     CHARACTER_DATA_QUERY,
     {
-      variables: { page: pageIndex },
+      variables: { page: pageIndex, filter: { name: searchValue } },
     }
   );
+
+  const handleSearch = (e: SyntheticEvent): void => {
+    const searchInput = (e.target as HTMLInputElement).value;
+    setInputValue(searchInput);
+    setSearchValue(searchInput);
+  };
 
   const nextPage = (): void => {
     setPageIndex(pageIndex + 1);
@@ -56,6 +64,14 @@ export function Characters(): JSX.Element {
     <div>
       <h2>Characters</h2>
       {error && <p>Error: data not found</p>}
+      <form>
+        <input
+          type="text"
+          placeholder="Search your favorite character"
+          onChange={handleSearch}
+          value={inputValue}
+        />
+      </form>
       {loading ? (
         <img src="assets/loading-rm.png" alt="loading" />
       ) : (
@@ -74,11 +90,6 @@ export function Characters(): JSX.Element {
               ))}
             </ul>
           )}
-          <Buttons
-            nextPage={nextPage}
-            prevPage={prevPage}
-            currentPage={pageIndex}
-          />
         </div>
       )}
     </div>
