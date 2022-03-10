@@ -63,7 +63,6 @@ export function Characters(): JSX.Element {
   return (
     <div>
       <h2>Characters</h2>
-      {error && <p>Error: data not found</p>}
       <form>
         <input
           type="text"
@@ -72,6 +71,12 @@ export function Characters(): JSX.Element {
           value={inputValue}
         />
       </form>
+      {error && (
+        <>
+          <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
+          <p>Sorry no results</p>
+        </>
+      )}
       {loading ? (
         <img src="assets/loading-rm.png" alt="loading" />
       ) : (
