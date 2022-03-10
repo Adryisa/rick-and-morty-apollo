@@ -4,14 +4,12 @@ interface ButtonsPropsI {
   nextPage: () => void;
   prevPage: () => void;
   currentPage: number;
-  topPage: number;
 }
 
 export function Buttons({
   nextPage,
   prevPage,
   currentPage,
-  topPage,
 }: ButtonsPropsI): JSX.Element {
   return (
     <div>
@@ -20,7 +18,7 @@ export function Buttons({
           PREVIOUS
         </button>
       )}
-      {currentPage > topPage && (
+      {currentPage && (
         <button type="button" onClick={nextPage}>
           NEXT
         </button>

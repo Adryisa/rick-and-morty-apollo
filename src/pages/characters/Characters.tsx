@@ -54,12 +54,11 @@ export function Characters(): JSX.Element {
 
   return (
     <div>
-      {error && <p>Error: data not found</p>}
       <h2>Characters</h2>
+      {error && <p>Error: data not found</p>}
       <Buttons
         nextPage={nextPage}
         prevPage={prevPage}
-        topPage={data?.characters.info.pages}
         currentPage={pageIndex}
       />
     </div>

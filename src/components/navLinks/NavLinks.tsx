@@ -5,7 +5,7 @@ export function NavLinks(): JSX.Element {
   return (
     <nav>
       <ul>
-        <Link to="/*">
+        <Link to="/">
           <li>Characters</li>
         </Link>
         <Link to="/episodes/">

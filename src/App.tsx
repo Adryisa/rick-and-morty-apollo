@@ -15,11 +15,11 @@ function App(): JSX.Element {
       <Header />
       <main>
         <Routes>
-          <Route path="/*" element={<Characters />} />
+          <Route path="/" element={<Characters />} />
           <Route path="/character/:id" element={<CharacterDetails />} />
-          <Route path="/locations/*" element={<Locations />} />
+          <Route path="/locations/" element={<Locations />} />
           <Route path="/locations/:id" element={<LocationDetails />} />
-          <Route path="/episodes/*" element={<Episodes />} />
+          <Route path="/episodes/" element={<Episodes />} />
           <Route path="/episodes/:id" element={<EpisodeDetails />} />
         </Routes>
       </main>
