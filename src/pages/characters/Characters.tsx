@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
 import { Gallery } from '../../containers/gallery/Gallery';
 
@@ -50,19 +49,23 @@ export function Characters(): JSX.Element {
   };
   return (
     <div>
-      <Buttons
-        nextPage={nextPage}
-        prevPage={prevPage}
-        prev={data?.characters.info.prev}
-        next={data?.characters.info.next}
-      />
-      <Gallery />
-      <Buttons
-        nextPage={nextPage}
-        prevPage={prevPage}
-        prev={data?.characters.info.prev}
-        next={data?.characters.info.next}
-      />
+      {data && (
+        <>
+          <Buttons
+            nextPage={nextPage}
+            prevPage={prevPage}
+            prev={data?.characters.info.prev}
+            next={data?.characters.info.next}
+          />
+          <Gallery pageIndex={pageIndex} searchValue={searchValue} />
+          <Buttons
+            nextPage={nextPage}
+            prevPage={prevPage}
+            prev={data?.characters.info.prev}
+            next={data?.characters.info.next}
+          />
+        </>
+      )}
     </div>
   );
 }

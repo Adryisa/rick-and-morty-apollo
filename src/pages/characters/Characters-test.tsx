@@ -4,7 +4,7 @@ import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
-import { CharacterCard } from '../../components/cardCharacter/CardCharacter';
+import { CharacterCard } from '../../containers/cardCharacter/CardCharacter';
 
 interface CharacterDataI {
   characters: {
@@ -61,7 +61,7 @@ const CHARACTER_DATA_QUERY = gql`
   }
 `;
 
-export function Characters(): JSX.Element {
+export function CharactersTest(): JSX.Element {
   const [formState, setFormState] = useState({ name: '', gender: 'female' });
   const [data2, setData2] = useState<CharacterDataI | undefined>(undefined);
 
