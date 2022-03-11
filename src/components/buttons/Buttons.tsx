@@ -3,22 +3,24 @@ import React from 'react';
 interface ButtonsPropsI {
   nextPage: () => void;
   prevPage: () => void;
-  currentPage: number;
+  prev: number | null;
+  next: number | null;
 }
 
 export function Buttons({
   nextPage,
   prevPage,
-  currentPage,
+  prev,
+  next,
 }: ButtonsPropsI): JSX.Element {
   return (
     <div>
-      {currentPage > 1 && (
+      {prev && (
         <button type="button" onClick={prevPage}>
           PREVIOUS
         </button>
       )}
-      {currentPage && (
+      {next && (
         <button type="button" onClick={nextPage}>
           NEXT
         </button>
