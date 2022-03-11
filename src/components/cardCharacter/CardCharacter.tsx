@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface CharacterDetailsPropsI {
-  name: string;
-  image: string;
+  name: string | undefined;
+  image: string | undefined;
 }
 
 export function CharacterCard({
