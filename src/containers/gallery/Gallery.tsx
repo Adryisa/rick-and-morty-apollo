@@ -1,11 +1,12 @@
 import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterCard } from '../cardCharacter/CardCharacter';
 
 interface GalleryPropsI {
   pageIndex: number;
   searchValue: string;
+  setContentLoading: (loading: boolean) => void;
 }
 interface QueryVariableI {
   page: number;
@@ -33,6 +34,7 @@ export const CHARACTERS_QUERY = gql`
 export function Gallery({
   pageIndex,
   searchValue,
+  setContentLoading,
 }: GalleryPropsI): JSX.Element {
   const { data, loading, error } = useQuery<CharacterDataI, QueryVariableI>(
     CHARACTERS_QUERY,
@@ -40,9 +42,13 @@ export function Gallery({
       variables: { page: pageIndex, filter: { name: searchValue } },
     }
   );
+
+  // useEffect(
+  //   () => (loading ? setContentLoading(true) : setContentLoading(false)),
+  //   [loading, setContentLoading]
+  // );
   return (
     <>
-      <h2>Characters</h2>
       {error && (
         <>
           <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />

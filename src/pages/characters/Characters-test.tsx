@@ -153,16 +153,11 @@ export function CharactersTest(): JSX.Element {
           <p>Sorry no results</p>
         </>
       )}
-      {loading ? (
+      {/* {loading ? (
         <img src="assets/loading-rm.png" alt="loading" />
       ) : (
         <div>
-          <Buttons
-            nextPage={nextPage}
-            prevPage={prevPage}
-            prev={data?.characters.info.prev as number | null}
-            next={data?.characters.info.next as number | null}
-          />
+          <Buttons />
           {data2 && (
             <ul>
               {data2.characters.results.map((item) => (
@@ -173,7 +168,7 @@ export function CharactersTest(): JSX.Element {
             </ul>
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
