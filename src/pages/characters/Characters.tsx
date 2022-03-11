@@ -1,4 +1,5 @@
-import React, { SyntheticEvent, useState } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Buttons } from '../../components/buttons/Buttons';
@@ -42,7 +43,10 @@ export function Characters(): JSX.Element {
   const { data, loading, error } = useQuery<CharacterDataI>(
     CHARACTER_DATA_QUERY,
     {
-      variables: { page: pageIndex, filter: { name: searchValue } },
+      variables: {
+        page: pageIndex,
+        filter: { name: searchValue, gender: searchValue },
+      },
     }
   );
 
@@ -59,6 +63,11 @@ export function Characters(): JSX.Element {
   const prevPage = (): void => {
     setPageIndex(pageIndex - 1);
   };
+
+  // useEffect(() => {
+  //   setInputValue('');
+  //   setSearchValue('');
+  // }, [setSearchValue]);
 
   return (
     <div>
