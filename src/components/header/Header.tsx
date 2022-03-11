@@ -6,7 +6,7 @@ export function Header(): JSX.Element {
   return (
     <div>
       <h1>Rick and Morty ft. GraphQL</h1>
-      <Link to="/*">
+      <Link to="/">
         <img src="/assets/rm.png" alt="" height="80px" />
       </Link>
       <NavLinks />

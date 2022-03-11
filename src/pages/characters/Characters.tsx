@@ -1,48 +1,51 @@
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
+import { Gallery } from '../../containers/gallery/Gallery';
+import { SearchBar } from '../../components/searchBar/searchBar';
 
-interface CharacterDataI {
+interface CharactersPagesAmountQueryI {
   characters: {
     info: {
       pages: number;
       next: number;
       prev: number;
     };
-    results: [
-      {
-        id: string;
-        name: string;
-        image: string;
-      }
-    ];
   };
 }
-const CHARACTER_DATA_QUERY = gql`
-  query CharacterdDataQuery($page: Int, $filter: FilterCharacter) {
-    characters(page: $page, filter: $filter) {
+
+interface CharactersPageAmountQueryVariablesI {
+  filter: {
+    name: string;
+  };
+}
+
+export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
+  query charactersPagesAmountQuery($filter: FilterCharacter) {
+    characters(filter: $filter) {
       info {
         pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        image
       }
     }
   }
 `;
 
 export function Characters(): JSX.Element {
-  const [pageIndex, setPageIndex] = useState(1);
-  const { data, loading, error } = useQuery<CharacterDataI>(
-    CHARACTER_DATA_QUERY,
-    {
-      variables: { page: pageIndex },
-    }
-  );
+  const [searchValue, setSearchValue] = useState({ name: '' });
+  const [contentLoading, setContentLoading] = useState(true);
+  const [pageIndex, setPageIndex] = useState<number>(1);
+
+  const { data } = useQuery<
+    CharactersPagesAmountQueryI,
+    CharactersPageAmountQueryVariablesI
+  >(CHARACTERS_PAGES_AMOUNT_QUERY, {
+    variables: { filter: { name: searchValue.name } },
+  });
+
+  const handleChange = (e: SyntheticEvent): void => {
+    const target = e.target as HTMLInputElement;
+    setSearchValue({ ...searchValue, [target.name]: target.value });
+  };
 
   const nextPage = (): void => {
     setPageIndex(pageIndex + 1);
@@ -54,13 +57,20 @@ export function Characters(): JSX.Element {
 
   return (
     <div>
-      {error && <p>Error: data not found</p>}
       <h2>Characters</h2>
-      <Buttons
-        nextPage={nextPage}
-        prevPage={prevPage}
-        topPage={data?.characters.info.pages}
-        currentPage={pageIndex}
+      <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
+      {data && !contentLoading && (
+        <Buttons
+          nextPage={nextPage}
+          prevPage={prevPage}
+          currentPage={pageIndex}
+          maxPage={data?.characters?.info.pages}
+        />
+      )}
+      <Gallery
+        pageIndex={pageIndex}
+        searchValue={searchValue.name}
+        setContentLoading={setContentLoading}
       />
     </div>
   );
