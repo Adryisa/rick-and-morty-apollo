@@ -58,12 +58,14 @@ export function Characters(): JSX.Element {
     <div>
       <h2>Characters</h2>
       <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
-      <Buttons
-        nextPage={nextPage}
-        prevPage={prevPage}
-        currentPage={pageIndex}
-        maxPage={data?.characters?.info.pages}
-      />
+      {data && !contentLoading && (
+        <Buttons
+          nextPage={nextPage}
+          prevPage={prevPage}
+          currentPage={pageIndex}
+          maxPage={data?.characters?.info.pages}
+        />
+      )}
       <Gallery
         pageIndex={pageIndex}
         searchValue={searchValue.name}

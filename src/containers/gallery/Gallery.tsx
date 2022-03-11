@@ -66,21 +66,15 @@ export function Gallery({
     });
   };
 
-  // useEffect(
-  //   () => (loading ? setContentLoading(true) : setContentLoading(false)),
-  //   [loading, setContentLoading]
-  // );
+  useEffect(
+    () => (loading ? setContentLoading(true) : setContentLoading(false)),
+    [loading, setContentLoading]
+  );
   return (
     <>
       <button type="button" onClick={handleSort}>
         SORT
       </button>
-      {error && (
-        <>
-          <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
-          <p>Sorry no results</p>
-        </>
-      )}
       {loading ? (
         <img src="assets/loading-rm.png" alt="loading" />
       ) : (
