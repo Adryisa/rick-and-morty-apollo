@@ -75,21 +75,19 @@ export function Gallery({
       <button type="button" onClick={handleSort}>
         SORT
       </button>
-      {loading ? (
-        <img src="assets/loading-rm.png" alt="loading" />
-      ) : (
-        <div>
-          {sortedData && (
-            <ul>
-              {sortedData.characters.results.map((item) => (
-                <Link to={`character/${item.id}`} key={item.id}>
-                  <CharacterCard name={item.name} image={item.image} />
-                </Link>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
+      {error && <p>Im sorry no results :-(</p>}
+      {loading && <img src="assets/loading-rm.png" alt="loading" />}
+      <div>
+        {sortedData && (
+          <ul>
+            {sortedData.characters.results.map((item) => (
+              <Link to={`character/${item.id}`} key={item.id}>
+                <CharacterCard name={item.name} image={item.image} />
+              </Link>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }

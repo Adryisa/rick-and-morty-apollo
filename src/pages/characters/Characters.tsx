@@ -54,6 +54,7 @@ export function Characters(): JSX.Element {
   const prevPage = (): void => {
     setPageIndex(pageIndex - 1);
   };
+
   return (
     <div>
       <h2>Characters</h2>
