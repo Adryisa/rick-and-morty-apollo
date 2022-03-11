@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
 import { Gallery } from '../../containers/gallery/Gallery';
+import { SearchBar } from '../../components/searchBar/searchBar';
 
 interface CharactersPagesAmountQueryI {
   characters: {
@@ -30,7 +31,7 @@ export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
 `;
 
 export function Characters(): JSX.Element {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState({ name: '' });
   const [contentLoading, setContentLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState<number>(1);
 
@@ -38,8 +39,13 @@ export function Characters(): JSX.Element {
     CharactersPagesAmountQueryI,
     CharactersPageAmountQueryVariablesI
   >(CHARACTERS_PAGES_AMOUNT_QUERY, {
-    variables: { filter: { name: searchValue } },
+    variables: { filter: { name: searchValue.name } },
   });
+
+  const handleChange = (e: SyntheticEvent): void => {
+    const target = e.target as HTMLInputElement;
+    setSearchValue({ ...searchValue, [target.name]: target.value });
+  };
 
   const nextPage = (): void => {
     setPageIndex(pageIndex + 1);
@@ -51,6 +57,7 @@ export function Characters(): JSX.Element {
   return (
     <div>
       <h2>Characters</h2>
+      <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
       <Buttons
         nextPage={nextPage}
         prevPage={prevPage}
@@ -59,7 +66,7 @@ export function Characters(): JSX.Element {
       />
       <Gallery
         pageIndex={pageIndex}
-        searchValue={searchValue}
+        searchValue={searchValue.name}
         setContentLoading={setContentLoading}
       />
     </div>
