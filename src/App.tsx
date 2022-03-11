@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/header/Header';
-import { Characters } from './pages/characters/Characters';
+import { Characters } from './pages/characters/Characters-test';
 import { CharacterDetails } from './pages/characterDetails/CharacterDetails';
 import { EpisodeDetails } from './pages/episodeDetails/EpisodeDetails';
 import { Episodes } from './pages/episodes/Episodes';

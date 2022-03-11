@@ -1,92 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import { CharacterCard } from '../../components/cardCharacter/CardCharacter';
+import { Buttons } from '../../components/buttons/Buttons';
+import { Gallery } from '../../containers/gallery/Gallery';
 
-interface CharacterPagesDataI {
+interface CharactersPagesAmountQueryI {
   characters: {
-    info:
-      | {
-          count: number | null;
-          pages: number | null;
-          next: number | null;
-          prev: number | null;
-        }
-      | undefined;
+    info: {
+      pages: number;
+      next: number;
+      prev: number;
+    };
   };
 }
 
-interface CharacterDataI {
-  characters: {
-    results: [
-      | {
-          id: string;
-          name: string;
-          image: string;
-        }
-      | undefined
-    ];
+interface CharactersPageAmountQueryVariablesI {
+  filter: {
+    name: string;
   };
 }
 
-const CHARACTER_PAGES_QUERY = gql`
-  query CharacterPagesQuery($page: Int) {
-    characters(page: $page) {
-      info {
-        count
-        pages
-        next
-        prev
-      }
-    }
-  }
-`;
-
-const CHARACTER_DATA_QUERY = gql`
-  query CharacterDataQuery($filter: FilterCharacter) {
+export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
+  query charactersPagesAmountQuery($filter: FilterCharacter) {
     characters(filter: $filter) {
-      results {
-        id
-        image
-        name
+      info {
+        pages
       }
     }
   }
 `;
 
 export function Characters(): JSX.Element {
-  const { data: pagesData } = useQuery<CharacterPagesDataI>(
-    CHARACTER_PAGES_QUERY
-  );
+  const [searchValue, setSearchValue] = useState('');
+  const [pageIndex, setPageIndex] = useState<number>(1);
 
-  const {
-    data: charactersData,
-    loading: characterLoading,
-    error: characterError,
-  } = useQuery<CharacterDataI>(CHARACTER_DATA_QUERY);
+  const { data } = useQuery<
+    CharactersPagesAmountQueryI,
+    CharactersPageAmountQueryVariablesI
+  >(CHARACTERS_PAGES_AMOUNT_QUERY, {
+    variables: { filter: { name: searchValue } },
+  });
 
+  const nextPage = (): void => {
+    setPageIndex(pageIndex + 1);
+  };
+
+  const prevPage = (): void => {
+    setPageIndex(pageIndex - 1);
+  };
   return (
     <div>
-      <h2>Characters</h2>
-      {characterError && (
-        <>
-          <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
-          <p>Sorry no results</p>
-        </>
-      )}
-      <button type="button">MORE</button>
-      <button type="button">LESS</button>
-      {characterLoading ? (
-        <img src="assets/loading-rm.png" alt="loading" />
-      ) : (
-        <div>
-          {charactersData?.characters.results.map((item) => (
-            <Link to={`character/${item?.id}`} key={item?.id}>
-              <CharacterCard name={item?.name} image={item?.image} />
-            </Link>
-          ))}
-        </div>
-      )}
+      <Buttons
+        nextPage={nextPage}
+        prevPage={prevPage}
+        prev={data?.characters.info.prev}
+        next={data?.characters.info.next}
+      />
+      <Gallery />
+      <Buttons
+        nextPage={nextPage}
+        prevPage={prevPage}
+        prev={data?.characters.info.prev}
+        next={data?.characters.info.next}
+      />
     </div>
   );
 }
