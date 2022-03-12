@@ -30,6 +30,7 @@ export function Selectors({
         </select>
       </label>
       <label htmlFor="status">
+        <p>Status:</p>
         <select
           name="status"
           id="status"

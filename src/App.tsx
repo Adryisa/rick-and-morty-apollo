@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/header/Header';
+import { CharacterDetail } from './pages/characterDetails/CharacterDetails';
 import { Characters } from './pages/characters/Characters';
-import { CharacterDetails } from './pages/characterDetails/CharacterDetails';
 
 function App(): JSX.Element {
   return (
@@ -12,7 +12,7 @@ function App(): JSX.Element {
       <main>
         <Routes>
           <Route path="/" element={<Characters />} />
-          <Route path="/character/:id" element={<CharacterDetails />} />
+          <Route path="/character/:id" element={<CharacterDetail />} />
         </Routes>
       </main>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
@@ -53,29 +54,74 @@ export interface CharactersDetailsI {
 interface CharacterDetailsVariableI {
   characterId?: string;
 }
-export function CharacterDetails(): JSX.Element {
+
+export function CharacterDetail(): JSX.Element {
   const { id } = useParams();
 
-  const { data, loading, error } = useQuery<CharactersDetailsI>(
-    CHARACTER_DETAILS_QUERY,
-    {
-      variables: { characterId: id },
-    }
-  );
+  const { loading, error, data } = useQuery<
+    CharactersDetailsI,
+    CharacterDetailsVariableI
+  >(CHARACTER_DETAILS_QUERY, {
+    variables: { characterId: id },
+  });
 
   return (
     <div>
+      {error && <p>Error :(</p>}
+      {loading && <p>Loading...</p>}
       {data && (
-        <ul>
-          <img src={data.character.image} alt={data.character.name} />
-          <li>{data.character.name}</li>
-          <li>Vive en: {data.character.origin.name}</li>
-          <li>{data.character.origin.type}</li>
-          <li>{data.character.origin.dimension}</li>
-          <li>{data.character.species}</li>
-          <li>{data.character.status}</li>
-          <li>{data.character.gender}</li>
-        </ul>
+        <div className="w-8/12">
+          <h2 className="font-bold text-4xl text-center mb-5">
+            {data.character.name}
+          </h2>
+          <div>
+            <img src={data.character.image} alt={data.character.name} />
+            <div>
+              {data.character.status && (
+                <p>
+                  <strong>Status:</strong> {data.character.status}
+                </p>
+              )}
+              {data.character.species && (
+                <p>
+                  <strong>Species:</strong> {data.character.species}
+                </p>
+              )}
+              {data.character.gender && (
+                <p>
+                  <strong>Gender:</strong> {data.character.gender}
+                </p>
+              )}
+              {data.character.type && (
+                <p>
+                  <strong>Type:</strong> {data.character.type}
+                </p>
+              )}
+              {data.character.origin.name &&
+                data.character.origin.name !== 'unknown' && (
+                  <p>
+                    <strong>Origin: </strong>
+                    {data.character.origin.name}
+                  </p>
+                )}
+              {data.character.location.name &&
+                data.character.location.name !== 'unknown' && (
+                  <p>
+                    <strong>Location:</strong>
+                    {data.character.location.name}
+                  </p>
+                )}
+            </div>
+          </div>
+          <h4>
+            <strong>Episodes:</strong>
+          </h4>
+          <div>
+            {data.character.episode.map((episode) => (
+              <p key={episode.id}>{episode.name}</p>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
