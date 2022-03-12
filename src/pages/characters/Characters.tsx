@@ -5,24 +5,10 @@ import { Buttons } from '../../components/buttons/Buttons';
 import { Gallery } from '../../containers/gallery/Gallery';
 import { SearchBar } from '../../components/searchBar/searchBar';
 import { GENDER, STATUS } from '../../data/constants';
-
-interface CharactersPagesAmountQueryI {
-  characters: {
-    info: {
-      pages: number;
-      next: number;
-      prev: number;
-    };
-  };
-}
-
-interface CharactersPageAmountQueryVariablesI {
-  filter: {
-    name: string;
-    gender: string;
-    status: string;
-  };
-}
+import {
+  CharactersPageAmountQueryVariablesI,
+  CharactersPagesAmountQueryI,
+} from './charactersInterfaces';
 
 export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
   query charactersPagesAmountQuery($filter: FilterCharacter) {
