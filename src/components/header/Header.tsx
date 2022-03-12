@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NavLinks } from '../navLinks/NavLinks';
 
 export function Header(): JSX.Element {
   return (
@@ -9,7 +8,6 @@ export function Header(): JSX.Element {
       <Link to="/">
         <img src="/assets/rm.png" alt="" height="80px" />
       </Link>
-      <NavLinks />
     </div>
   );
 }
