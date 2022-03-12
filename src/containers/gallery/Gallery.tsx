@@ -5,13 +5,17 @@ import { CharacterCard } from '../cardCharacter/CardCharacter';
 
 interface GalleryPropsI {
   pageIndex: number;
-  searchValue: string;
+  name: string;
+  gender: string;
+  status;
   setContentLoading: (loading: boolean) => void;
 }
 interface QueryVariableI {
   page: number;
   filter: {
     name: string;
+    gender: string;
+    status: string;
   };
 }
 interface CharacterDataI {
@@ -33,14 +37,16 @@ export const CHARACTERS_QUERY = gql`
 
 export function Gallery({
   pageIndex,
-  searchValue,
+  name,
+  gender,
+  status,
   setContentLoading,
 }: GalleryPropsI): JSX.Element {
   const [sortedData, setSortedData] = useState<CharacterDataI>(undefined);
   const { data, loading, error } = useQuery<CharacterDataI, QueryVariableI>(
     CHARACTERS_QUERY,
     {
-      variables: { page: pageIndex, filter: { name: searchValue } },
+      variables: { page: pageIndex, filter: { name, gender, status } },
     }
   );
 
@@ -75,17 +81,25 @@ export function Gallery({
       <button type="button" onClick={handleSort}>
         SORT
       </button>
-      {error && <p>Im sorry no results :-(</p>}
       {loading && <img src="assets/loading-rm.png" alt="loading" />}
       <div>
-        {sortedData && (
-          <ul>
-            {sortedData.characters.results.map((item) => (
-              <Link to={`character/${item.id}`} key={item.id}>
-                <CharacterCard name={item.name} image={item.image} />
-              </Link>
-            ))}
-          </ul>
+        {error ? (
+          <>
+            <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
+            <p>Sorry no results</p>
+          </>
+        ) : (
+          <div>
+            {sortedData && (
+              <ul>
+                {sortedData.characters.results.map((item) => (
+                  <Link to={`character/${item.id}`} key={item.id}>
+                    <CharacterCard name={item.name} image={item.image} />
+                  </Link>
+                ))}
+              </ul>
+            )}
+          </div>
         )}
       </div>
     </>

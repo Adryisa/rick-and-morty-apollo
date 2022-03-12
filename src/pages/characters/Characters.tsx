@@ -3,22 +3,12 @@ import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
 import { Gallery } from '../../containers/gallery/Gallery';
 import { SearchBar } from '../../components/searchBar/searchBar';
-
-interface CharactersPagesAmountQueryI {
-  characters: {
-    info: {
-      pages: number;
-      next: number;
-      prev: number;
-    };
-  };
-}
-
-interface CharactersPageAmountQueryVariablesI {
-  filter: {
-    name: string;
-  };
-}
+import {
+  CharactersPageAmountQueryVariablesI,
+  CharactersPagesAmountQueryI,
+  QueryFiltersI,
+} from './charactersInterfaces';
+import { Selectors } from '../../components/selectors/Selectors';
 
 export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
   query charactersPagesAmountQuery($filter: FilterCharacter) {
@@ -31,7 +21,11 @@ export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
 `;
 
 export function Characters(): JSX.Element {
-  const [searchValue, setSearchValue] = useState({ name: '' });
+  const [searchValue, setSearchValue] = useState<QueryFiltersI>({
+    name: '',
+    gender: '',
+    status: '',
+  });
   const [contentLoading, setContentLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState<number>(1);
 
@@ -39,7 +33,13 @@ export function Characters(): JSX.Element {
     CharactersPagesAmountQueryI,
     CharactersPageAmountQueryVariablesI
   >(CHARACTERS_PAGES_AMOUNT_QUERY, {
-    variables: { filter: { name: searchValue.name } },
+    variables: {
+      filter: {
+        name: searchValue.name,
+        gender: searchValue.gender,
+        status: searchValue.status,
+      },
+    },
   });
 
   const handleChange = (e: SyntheticEvent): void => {
@@ -59,6 +59,11 @@ export function Characters(): JSX.Element {
     <div>
       <h2>Characters</h2>
       <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
+      <Selectors
+        handleChange={handleChange}
+        gender={searchValue.gender}
+        status={searchValue.status}
+      />
       {data && !contentLoading && (
         <Buttons
           nextPage={nextPage}
@@ -69,7 +74,9 @@ export function Characters(): JSX.Element {
       )}
       <Gallery
         pageIndex={pageIndex}
-        searchValue={searchValue.name}
+        name={searchValue.name}
+        gender={searchValue.gender}
+        status={searchValue.status}
         setContentLoading={setContentLoading}
       />
     </div>
