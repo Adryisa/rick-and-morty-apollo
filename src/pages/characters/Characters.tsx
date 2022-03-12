@@ -3,7 +3,6 @@ import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
 import { Gallery } from '../../containers/gallery/Gallery';
 import { SearchBar } from '../../components/searchBar/searchBar';
-import { GENDER, STATUS } from '../../data/constants';
 import {
   CharactersPageAmountQueryVariablesI,
   CharactersPagesAmountQueryI,
