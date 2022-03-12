@@ -4,10 +4,6 @@ import './App.css';
 import { Header } from './components/header/Header';
 import { Characters } from './pages/characters/Characters';
 import { CharacterDetails } from './pages/characterDetails/CharacterDetails';
-import { EpisodeDetails } from './pages/episodeDetails/EpisodeDetails';
-import { Episodes } from './pages/episodes/Episodes';
-import { LocationDetails } from './pages/locationDetails/LocationDetails';
-import { Locations } from './pages/locations/Locations';
 
 function App(): JSX.Element {
   return (
@@ -17,10 +13,6 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<Characters />} />
           <Route path="/character/:id" element={<CharacterDetails />} />
-          <Route path="/locations/" element={<Locations />} />
-          <Route path="/locations/:id" element={<LocationDetails />} />
-          <Route path="/episodes/" element={<Episodes />} />
-          <Route path="/episodes/:id" element={<EpisodeDetails />} />
         </Routes>
       </main>
     </div>
