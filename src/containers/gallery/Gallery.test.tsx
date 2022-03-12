@@ -42,6 +42,7 @@ const charactersMockError = {
   },
   error: new Error('404: Not Found'),
 };
+
 describe('Given the gallery component', () => {
   describe('When its loading', () => {
     test('Then it should render an image with alt text loading', () => {
