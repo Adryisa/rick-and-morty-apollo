@@ -5,13 +5,17 @@ import { CharacterCard } from '../cardCharacter/CardCharacter';
 
 interface GalleryPropsI {
   pageIndex: number;
-  searchValue: string;
+  name: string;
+  gender: string;
+  status;
   setContentLoading: (loading: boolean) => void;
 }
 interface QueryVariableI {
   page: number;
   filter: {
     name: string;
+    gender: string;
+    status: string;
   };
 }
 interface CharacterDataI {
@@ -33,14 +37,16 @@ export const CHARACTERS_QUERY = gql`
 
 export function Gallery({
   pageIndex,
-  searchValue,
+  name,
+  gender,
+  status,
   setContentLoading,
 }: GalleryPropsI): JSX.Element {
   const [sortedData, setSortedData] = useState<CharacterDataI>(undefined);
   const { data, loading, error } = useQuery<CharacterDataI, QueryVariableI>(
     CHARACTERS_QUERY,
     {
-      variables: { page: pageIndex, filter: { name: searchValue } },
+      variables: { page: pageIndex, filter: { name, gender, status } },
     }
   );
 
