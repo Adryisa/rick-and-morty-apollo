@@ -15,3 +15,9 @@ export interface CharactersPageAmountQueryVariablesI {
     status: string;
   };
 }
+
+export interface QueryFiltersI {
+  name: string;
+  gender: string;
+  status: string;
+}

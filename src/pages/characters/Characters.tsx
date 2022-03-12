@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React, { SyntheticEvent, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Buttons } from '../../components/buttons/Buttons';
@@ -8,7 +7,9 @@ import { GENDER, STATUS } from '../../data/constants';
 import {
   CharactersPageAmountQueryVariablesI,
   CharactersPagesAmountQueryI,
+  QueryFiltersI,
 } from './charactersInterfaces';
+import { Selectors } from '../../components/selectors/Selectors';
 
 export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
   query charactersPagesAmountQuery($filter: FilterCharacter) {
@@ -21,7 +22,7 @@ export const CHARACTERS_PAGES_AMOUNT_QUERY = gql`
 `;
 
 export function Characters(): JSX.Element {
-  const [searchValue, setSearchValue] = useState({
+  const [searchValue, setSearchValue] = useState<QueryFiltersI>({
     name: '',
     gender: '',
     status: '',
@@ -59,35 +60,11 @@ export function Characters(): JSX.Element {
     <div>
       <h2>Characters</h2>
       <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
-      <label htmlFor="gender">
-        <p>Gender:</p>
-        <select
-          name="gender"
-          id="gender"
-          onChange={handleChange}
-          value={searchValue.gender}
-        >
-          {GENDER.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label htmlFor="status">
-        <select
-          name="status"
-          id="status"
-          onChange={handleChange}
-          value={searchValue.status}
-        >
-          {STATUS.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </label>
+      <Selectors
+        handleChange={handleChange}
+        gender={searchValue.gender}
+        status={searchValue.status}
+      />
       {data && !contentLoading && (
         <Buttons
           nextPage={nextPage}
