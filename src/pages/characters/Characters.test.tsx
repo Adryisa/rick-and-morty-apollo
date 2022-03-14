@@ -57,23 +57,25 @@ const mocks = [
 
     result: {
       data: {
-        results: [
-          {
-            id: '6',
-            name: 'rickyki',
-            image: 'rickyki.png',
-          },
-          {
-            id: '7',
-            name: 'moimoi',
-            image: 'moimoi.png',
-          },
-          {
-            id: '8',
-            name: 'buba-test',
-            image: 'buba-test.png',
-          },
-        ],
+        characters: {
+          results: [
+            {
+              id: '6',
+              name: 'rickyki',
+              image: 'rickyki.png',
+            },
+            {
+              id: '7',
+              name: 'moimoi',
+              image: 'moimoi.png',
+            },
+            {
+              id: '8',
+              name: 'buba-test',
+              image: 'buba-test.png',
+            },
+          ],
+        },
       },
     },
   },
