@@ -4,33 +4,35 @@ import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { CHARACTERS_QUERY, Gallery } from './Gallery';
 
-const charactersMock = {
-  request: {
-    query: CHARACTERS_QUERY,
-    variables: {
-      page: 1,
-      filter: { name: '' },
+const mocks = [
+  {
+    request: {
+      query: CHARACTERS_QUERY,
+      variables: {
+        page: 1,
+        filter: { name: '', gender: '', status: '' },
+      },
     },
-  },
-  result: {
-    data: {
-      characters: {
-        results: [
-          {
-            id: '1',
-            name: 'Rick Sanchez',
-            image: 'rick.jpg',
-          },
-          {
-            id: '2',
-            name: 'Morty Smith',
-            image: 'morty.jpg',
-          },
-        ],
+    result: {
+      data: {
+        characters: {
+          results: [
+            {
+              id: '1',
+              name: 'Rick',
+              image: 'rick.jpg',
+            },
+            {
+              id: '2',
+              name: 'Morty',
+              image: 'morty.jpg',
+            },
+          ],
+        },
       },
     },
   },
-};
+];
 
 const charactersMockError = {
   request: {
@@ -48,7 +50,7 @@ describe('Given the gallery component', () => {
     test('Then it should render an image with alt text loading', () => {
       const setContentLoading = jest.fn();
       render(
-        <MockedProvider mocks={[charactersMock]}>
+        <MockedProvider mocks={mocks}>
           <MemoryRouter>
             <Gallery
               pageIndex={1}
@@ -86,7 +88,7 @@ describe('Given the gallery component', () => {
     test('Then it should render the character info', async () => {
       const setContentLoading = jest.fn();
       render(
-        <MockedProvider mocks={[charactersMock]}>
+        <MockedProvider mocks={mocks}>
           <MemoryRouter>
             <Gallery
               pageIndex={1}
@@ -98,7 +100,7 @@ describe('Given the gallery component', () => {
           </MemoryRouter>
         </MockedProvider>
       );
-      expect(await screen.findByText(/Rick Sanchez/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Rick/i)).toBeInTheDocument();
     });
   });
 });
