@@ -120,7 +120,7 @@ describe('Given the characters component', () => {
   describe('When the info is loaded', () => {
     test('Then should render all the characters', async () => {
       render(
-        <MockedProvider mocks={mocks} addTypename>
+        <MockedProvider mocks={mocks} addTypename={false}>
           <MemoryRouter>
             <Characters />
           </MemoryRouter>
