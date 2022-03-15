@@ -2,8 +2,9 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
+import { request } from 'https';
 import { CHARACTERS_QUERY } from '../../containers/gallery/Gallery';
-import { Characters } from './Characters';
+import { Characters, CHARACTERS_PAGES_AMOUNT_QUERY } from './Characters';
 
 const mocks = [
   {
@@ -92,11 +93,34 @@ const charactersMockError = {
   error: new Error('404: Not Found'),
 };
 
+const pagesMock = {
+  request: {
+    query: CHARACTERS_PAGES_AMOUNT_QUERY,
+    variables: {
+      page: 1,
+      filter: {
+        name: '',
+        gender: '',
+        status: '',
+      },
+    },
+  },
+  result: {
+    data: {
+      characters: {
+        info: {
+          pages: 10,
+        },
+      },
+    },
+  },
+};
+
 describe('Given the characters component', () => {
   describe('When the info is loaded', () => {
     test('Then should render all the characters', async () => {
       render(
-        <MockedProvider mocks={mocks}>
+        <MockedProvider mocks={mocks} addTypename>
           <MemoryRouter>
             <Characters />
           </MemoryRouter>
