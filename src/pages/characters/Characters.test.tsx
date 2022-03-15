@@ -81,6 +81,17 @@ const mocks = [
   },
 ];
 
+const charactersMockError = {
+  request: {
+    query: CHARACTERS_QUERY,
+    variables: {
+      page: 1,
+      filter: { name: '' },
+    },
+  },
+  error: new Error('404: Not Found'),
+};
+
 describe('Given the characters component', () => {
   describe('When the info is loaded', () => {
     test('Then should render all the characters', async () => {
