@@ -68,6 +68,11 @@ const mockSorted = [
               name: 'morty',
               image: 'morty.jpg',
             },
+            {
+              id: '4',
+              name: 'mortyy',
+              image: 'morty.jpg',
+            },
           ],
         },
       },

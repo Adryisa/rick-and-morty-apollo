@@ -129,4 +129,16 @@ describe('Given the characters component', () => {
       expect(await screen.findByText(/ricky/i)).toBeInTheDocument();
     });
   });
+  describe('When there is an error in the data', () => {
+    test('Then sorry no result should be render', async () => {
+      render(
+        <MockedProvider mocks={[charactersMockError]} addTypename={false}>
+          <MemoryRouter>
+            <Characters />
+          </MemoryRouter>
+        </MockedProvider>
+      );
+      expect(await screen.findByText(/sorry no results/i)).toBeInTheDocument();
+    });
+  });
 });
