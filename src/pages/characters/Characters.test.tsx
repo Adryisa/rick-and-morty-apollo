@@ -2,6 +2,7 @@ import React from 'react';
 import { screen, render, prettyDOM, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
+import userEvent from '@testing-library/user-event';
 import { CHARACTERS_QUERY } from '../../containers/gallery/Gallery';
 import { Characters, CHARACTERS_PAGES_AMOUNT_QUERY } from './Characters';
 
@@ -162,6 +163,26 @@ describe('Given the characters component', () => {
       fireEvent.click(buttonPrev);
 
       expect(await screen.findByText('bubba')).toBeInTheDocument();
+    });
+  });
+  describe('Filling out the input text', () => {
+    test('Then the data should be render', async () => {
+      render(
+        <MockedProvider mocks={mocks}>
+          <MemoryRouter>
+            <Characters />
+          </MemoryRouter>
+        </MockedProvider>
+      );
+      expect(
+        screen.getByPlaceholderText(/search your favorite character/i)
+      ).toBeInTheDocument();
+
+      const input = screen.getByPlaceholderText(
+        /search your favorite character/i
+      );
+
+      fireEvent.change(input, { target: { value: 'test' } });
     });
   });
 });
