@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, prettyDOM } from '@testing-library/react';
+import { screen, render, prettyDOM, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { CHARACTERS_QUERY } from '../../containers/gallery/Gallery';
@@ -114,20 +114,6 @@ const charactersMockError = {
 };
 
 describe('Given the characters component', () => {
-  describe('When the info is loaded', () => {
-    test('Then should render all the characters', async () => {
-      render(
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <MemoryRouter>
-            <Characters />
-          </MemoryRouter>
-        </MockedProvider>
-      );
-
-      expect(await screen.findByText(/ricky/i)).toBeInTheDocument();
-      console.log(await prettyDOM());
-    });
-  });
   describe('When there is an error in the data', () => {
     test('Then sorry no result should be render', async () => {
       render(
@@ -139,6 +125,43 @@ describe('Given the characters component', () => {
       );
 
       expect(await screen.findByText(/sorry no results/i)).toBeInTheDocument();
+    });
+  });
+  describe('When the info is loaded', () => {
+    test('Then should render all the characters', async () => {
+      render(
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <MemoryRouter>
+            <Characters />
+          </MemoryRouter>
+        </MockedProvider>
+      );
+
+      expect(await screen.findByText(/ricky/i)).toBeInTheDocument();
+      expect(await screen.findAllByRole('button')).toHaveLength(2);
+    });
+  });
+  describe('When the next button is clicked', () => {
+    test('Then the next page should load and prev button render', async () => {
+      render(
+        <MockedProvider mocks={mocks}>
+          <MemoryRouter>
+            <Characters />
+          </MemoryRouter>
+        </MockedProvider>
+      );
+
+      const buttonNext = await screen.findByText(/next/i);
+
+      fireEvent.click(buttonNext);
+
+      expect(await screen.findByText('moimoi')).toBeInTheDocument();
+
+      const buttonPrev = await screen.findByText(/prev/i);
+
+      fireEvent.click(buttonPrev);
+
+      expect(await screen.findByText('bubba')).toBeInTheDocument();
     });
   });
 });
