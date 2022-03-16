@@ -1,8 +1,7 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, prettyDOM } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
-import { request } from 'https';
 import { CHARACTERS_QUERY } from '../../containers/gallery/Gallery';
 import { Characters, CHARACTERS_PAGES_AMOUNT_QUERY } from './Characters';
 
@@ -80,6 +79,27 @@ const mocks = [
       },
     },
   },
+  {
+    request: {
+      query: CHARACTERS_PAGES_AMOUNT_QUERY,
+      variables: {
+        filter: {
+          name: '',
+          gender: '',
+          status: '',
+        },
+      },
+    },
+    result: {
+      data: {
+        characters: {
+          info: {
+            pages: 10,
+          },
+        },
+      },
+    },
+  },
 ];
 
 const charactersMockError = {
@@ -93,29 +113,6 @@ const charactersMockError = {
   error: new Error('404: Not Found'),
 };
 
-const pagesMock = {
-  request: {
-    query: CHARACTERS_PAGES_AMOUNT_QUERY,
-    variables: {
-      page: 1,
-      filter: {
-        name: '',
-        gender: '',
-        status: '',
-      },
-    },
-  },
-  result: {
-    data: {
-      characters: {
-        info: {
-          pages: 10,
-        },
-      },
-    },
-  },
-};
-
 describe('Given the characters component', () => {
   describe('When the info is loaded', () => {
     test('Then should render all the characters', async () => {
@@ -126,7 +123,9 @@ describe('Given the characters component', () => {
           </MemoryRouter>
         </MockedProvider>
       );
+
       expect(await screen.findByText(/ricky/i)).toBeInTheDocument();
+      console.log(await prettyDOM());
     });
   });
   describe('When there is an error in the data', () => {
@@ -138,6 +137,7 @@ describe('Given the characters component', () => {
           </MemoryRouter>
         </MockedProvider>
       );
+
       expect(await screen.findByText(/sorry no results/i)).toBeInTheDocument();
     });
   });

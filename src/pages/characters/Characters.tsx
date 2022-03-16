@@ -29,7 +29,7 @@ export function Characters(): JSX.Element {
   const [contentLoading, setContentLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState<number>(1);
 
-  const { data } = useQuery<
+  const { data, error } = useQuery<
     CharactersPagesAmountQueryI,
     CharactersPageAmountQueryVariablesI
   >(CHARACTERS_PAGES_AMOUNT_QUERY, {
