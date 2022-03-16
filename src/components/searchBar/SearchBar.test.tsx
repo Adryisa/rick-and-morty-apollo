@@ -1,7 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import { SearchBar } from './searchBar';
 
 describe('Given the search bar component', () => {
