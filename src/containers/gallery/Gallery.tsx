@@ -2,27 +2,12 @@ import { gql, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterCard } from '../cardCharacter/CardCharacter';
+import {
+  CharacterDataI,
+  GalleryPropsI,
+  QueryVariableI,
+} from './galleryInterfaces';
 
-interface GalleryPropsI {
-  pageIndex: number;
-  name: string;
-  gender: string;
-  status;
-  setContentLoading: (loading: boolean) => void;
-}
-interface QueryVariableI {
-  page: number;
-  filter: {
-    name: string;
-    gender: string;
-    status: string;
-  };
-}
-interface CharacterDataI {
-  characters: {
-    results: [{ id: string; name: string; image: string }];
-  };
-}
 export const CHARACTERS_QUERY = gql`
   query CharactersQuery($page: Int, $filter: FilterCharacter) {
     characters(page: $page, filter: $filter) {
