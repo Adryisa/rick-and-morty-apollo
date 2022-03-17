@@ -13,14 +13,15 @@ export function Selectors({
   status,
 }: SelectorsPropsI): JSX.Element {
   return (
-    <div>
-      <label htmlFor="gender">
-        <p>Gender:</p>
+    <div className="flex gap-8 p-5">
+      <label htmlFor="gender" className="flex gap-2">
+        <p className="text-pink-100">Gender:</p>
         <select
           name="gender"
           id="gender"
           onChange={handleChange}
           value={gender}
+          className="rounded-md text-pink-100 bg-transparent border-2"
         >
           {GENDER.map((item, index) => (
             <option key={index} value={item}>
@@ -29,13 +30,14 @@ export function Selectors({
           ))}
         </select>
       </label>
-      <label htmlFor="status">
-        <p>Status:</p>
+      <label htmlFor="status" className="flex gap-2">
+        <p className="text-pink-100">Status:</p>
         <select
           name="status"
           id="status"
           onChange={handleChange}
           value={status}
+          className="rounded-md text-pink-100 bg-transparent border-2"
         >
           {STATUS.map((item, index) => (
             <option key={index} value={item}>
