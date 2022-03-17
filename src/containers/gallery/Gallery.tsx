@@ -64,19 +64,23 @@ export function Gallery({
   );
 
   return (
-    <>
-      <button type="button" onClick={handleSort}>
+    <div>
+      <button
+        type="button"
+        onClick={handleSort}
+        className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900"
+      >
         SORT
       </button>
       {loading && (
         <img src="assets/loading-rm.png" alt="loading" className="spinning" />
       )}
-      <div>
+      <div className="flex">
         {error ? (
-          <>
-            <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
-            <p>Sorry no results</p>
-          </>
+          <div className="flex flex-col justify-self-center">
+            <img src="assets/daco-sad.png" alt="daco-sad" className="w-32" />
+            <p className="text-2xl text-white">Sorry no results</p>
+          </div>
         ) : (
           <div>
             {sortedData && (
@@ -91,6 +95,6 @@ export function Gallery({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
