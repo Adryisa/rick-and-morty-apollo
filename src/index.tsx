@@ -3,7 +3,6 @@ import 'react-app-polyfill/stable';
 import 'fast-text-encoding/text';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
