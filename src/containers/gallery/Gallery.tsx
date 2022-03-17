@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './gallery.scss';
 import { CharacterCard } from '../cardCharacter/CardCharacter';
 import {
   CharacterDataI,
@@ -61,12 +62,15 @@ export function Gallery({
     () => (loading ? setContentLoading(true) : setContentLoading(false)),
     [loading, setContentLoading]
   );
+
   return (
     <>
       <button type="button" onClick={handleSort}>
         SORT
       </button>
-      {loading && <img src="assets/loading-rm.png" alt="loading" />}
+      {loading && (
+        <img src="assets/loading-rm.png" alt="loading" className="spinning" />
+      )}
       <div>
         {error ? (
           <>
