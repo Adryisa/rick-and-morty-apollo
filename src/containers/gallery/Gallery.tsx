@@ -93,7 +93,7 @@ export function Gallery({
         ) : (
           <div>
             {sortedData && (
-              <ul className="flex flex-wrap justify-center gap-4 mx-6 my-8">
+              <ul className="flex flex-wrap justify-center gap-8 mx-6 my-8">
                 {sortedData.characters.results.map((item) => (
                   <Link to={`character/${item.id}`} key={item.id}>
                     <CharacterCard name={item.name} image={item.image} />
