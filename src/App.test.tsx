@@ -12,6 +12,6 @@ test('renders title', () => {
       </MemoryRouter>
     </MockedProvider>
   );
-  const linkElement = screen.getByText(/Rick and Morty ft. GraphQL/i);
+  const linkElement = screen.getByText(/Rick and Morty/i);
   expect(linkElement).toBeInTheDocument();
 });
