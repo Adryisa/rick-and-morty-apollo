@@ -1,5 +1,7 @@
 # Rick and Morty app using GraphQL
 
+<img src="http://pngimg.com/uploads/rick_morty/rick_morty_PNG4.png" width="300" height="300" align="right"/>
+
 ## Description
 
 This is an app that fetch data from RickandMortyGraphQL API --> https://rickandmortyapi.com/graphql
