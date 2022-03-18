@@ -14,6 +14,7 @@ This is an app that fetch data from RickandMortyGraphQL API --> https://rickandm
 
 - React
 - Typescript
+- Tailwind
 - Apollo Client
 - GraphQL
 - Jest && React Testing Library
