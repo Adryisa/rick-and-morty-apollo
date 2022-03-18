@@ -78,7 +78,7 @@ describe('Given CharacterDetailComponent', () => {
         </MockedProvider>
       );
 
-      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(screen.getByAltText(/loading/i)).toBeInTheDocument();
     });
   });
   describe('When given a character and error', () => {
