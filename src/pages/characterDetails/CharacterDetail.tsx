@@ -129,7 +129,7 @@ export function CharacterDetail(): JSX.Element {
           </h4>
           <ul className="flex gap-5 flex-wrap justify-center mt-2 ">
             {data.character.episode.map((episode) => (
-              <li key={episode.id} className="list-disc">
+              <li key={episode.id} className="border border-pink-200 p-2">
                 {episode.name}
               </li>
             ))}
