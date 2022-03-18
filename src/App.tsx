@@ -6,8 +6,6 @@ import { CharacterDetail } from './pages/characterDetails/CharacterDetail';
 import { Characters } from './pages/characters/Characters';
 
 function App(): JSX.Element {
-  /* <main className="flex-1 my-4 flex flex-col justify-center" />; */
-
   return (
     <div className="App min-h-screen flex flex-col ">
       <Header />

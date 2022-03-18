@@ -78,11 +78,17 @@ export function Gallery({
       {loading && (
         <img src="assets/loading-rm.png" alt="loading" className="spinning" />
       )}
-      <div className="flex">
+      <div className="">
         {error ? (
-          <div className="flex flex-col">
-            <img src="assets/daco-sad.png" alt="daco-sad" className="w-32 " />
-            <p className="text-2xl text-white">Sorry no results</p>
+          <div className="flex justify-center gap-8 p-3">
+            <img
+              src="assets/daco-sad.png"
+              alt="daco-sad"
+              className="max-w-full h-80"
+            />
+            <p className="text-2xl text-rose-100 self-center">
+              Sorry no results :(
+            </p>
           </div>
         ) : (
           <div>
