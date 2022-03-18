@@ -65,11 +65,11 @@ export function Gallery({
 
   return (
     <div>
-      <div className="flex justify-end p-2 mr-5">
+      <div className="flex justify-end p-2 mr-5 ">
         <button
           type="button"
           onClick={handleSort}
-          className="bg-pink-100 w-32 rounded-lg font-normal text-slate-900"
+          className="bg-pink-100 w-32 rounded-lg text-slate-900 hover:bg-pink-200 active:bg-pink-300"
         >
           Order by name
         </button>

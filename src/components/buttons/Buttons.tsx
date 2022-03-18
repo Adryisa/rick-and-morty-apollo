@@ -19,7 +19,7 @@ export function Buttons({
         <button
           type="button"
           onClick={prevPage}
-          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900"
+          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900 hover:bg-pink-200  active:bg-pink-300"
         >
           PREV
         </button>
@@ -28,7 +28,7 @@ export function Buttons({
         <button
           type="button"
           onClick={nextPage}
-          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900"
+          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900 hover:bg-pink-200  active:bg-pink-300"
         >
           NEXT
         </button>
