@@ -14,14 +14,22 @@ export function Buttons({
   currentPage,
 }: ButtonsPropsI): JSX.Element {
   return (
-    <div>
+    <div className="flex gap-12 justify-center">
       {currentPage > 1 && (
-        <button type="button" onClick={prevPage}>
+        <button
+          type="button"
+          onClick={prevPage}
+          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900 hover:bg-pink-200  active:bg-pink-300"
+        >
           PREV
         </button>
       )}
       {currentPage < maxPage && (
-        <button type="button" onClick={nextPage}>
+        <button
+          type="button"
+          onClick={nextPage}
+          className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900 hover:bg-pink-200  active:bg-pink-300"
+        >
           NEXT
         </button>
       )}

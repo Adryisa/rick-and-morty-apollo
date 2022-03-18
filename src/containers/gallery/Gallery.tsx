@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './gallery.scss';
 import { CharacterCard } from '../cardCharacter/CardCharacter';
 import {
   CharacterDataI,
@@ -61,22 +62,40 @@ export function Gallery({
     () => (loading ? setContentLoading(true) : setContentLoading(false)),
     [loading, setContentLoading]
   );
+
   return (
-    <>
-      <button type="button" onClick={handleSort}>
-        SORT
-      </button>
-      {loading && <img src="assets/loading-rm.png" alt="loading" />}
+    <div>
+      <div className="flex justify-end p-2 mr-5 ">
+        <button
+          type="button"
+          onClick={handleSort}
+          className="bg-pink-100 w-32 rounded-lg text-slate-900 hover:bg-pink-200 active:bg-pink-300"
+        >
+          Order by name
+        </button>
+      </div>
+
+      {loading && (
+        <div className="flex justify-center">
+          <img src="assets/loading-rm.png" alt="loading" className="spinning" />
+        </div>
+      )}
       <div>
         {error ? (
-          <>
-            <img src="assets/daco-sad.png" alt="daco-sad" height="300px" />
-            <p>Sorry no results</p>
-          </>
+          <div className="flex justify-center gap-8 p-3">
+            <img
+              src="assets/daco-sad.png"
+              alt="daco-sad"
+              className="max-w-full h-80"
+            />
+            <p className="text-2xl text-rose-100 self-center">
+              Sorry no results :(
+            </p>
+          </div>
         ) : (
           <div>
             {sortedData && (
-              <ul>
+              <ul className="flex flex-wrap justify-center gap-8 mx-6 my-8">
                 {sortedData.characters.results.map((item) => (
                   <Link to={`character/${item.id}`} key={item.id}>
                     <CharacterCard name={item.name} image={item.image} />
@@ -87,6 +106,6 @@ export function Gallery({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

@@ -66,61 +66,77 @@ export function CharacterDetail(): JSX.Element {
   });
 
   return (
-    <div>
-      {error && <p>Error :(</p>}
-      {loading && <p>Loading...</p>}
+    <div className="text-white flex justify-center p-2">
+      {error && <p className="text-center text-4xl">Error :(</p>}
+      {loading && (
+        <img src="/assets/loading-rm.png" alt="loading" className="spinning" />
+      )}
+
       {data && (
-        <div className="w-8/12">
-          <h2 className="font-bold text-4xl text-center mb-5">
+        <div className="w-2/3">
+          <h2 className="text-pink-300 font-bold text-2xl text-center mb-4">
             {data.character.name}
           </h2>
-          <div>
-            <img src={data.character.image} alt={data.character.name} />
-            <div>
+          <div className="flex w-full align-center gap-8">
+            <img
+              src={data.character.image}
+              alt={data.character.name}
+              className="rounded-md"
+            />
+            <div className="text-lg flex justify-center flex-col">
               {data.character.status && (
                 <p>
-                  <strong>Status:</strong> {data.character.status}
+                  <strong className="text-pink-300">Status: </strong>
+                  {data.character.status}
                 </p>
               )}
               {data.character.species && (
                 <p>
-                  <strong>Species:</strong> {data.character.species}
+                  <strong className="text-pink-300">Species: </strong>
+                  {data.character.species}
                 </p>
               )}
               {data.character.gender && (
                 <p>
-                  <strong>Gender:</strong> {data.character.gender}
+                  <strong className="text-pink-300">Gender: </strong>
+                  {data.character.gender}
                 </p>
               )}
               {data.character.type && (
                 <p>
-                  <strong>Type:</strong> {data.character.type}
+                  <strong className="text-pink-300">Type: </strong>
+                  {data.character.type}
                 </p>
               )}
               {data.character.origin.name &&
                 data.character.origin.name !== 'unknown' && (
                   <p>
-                    <strong>Origin: </strong>
+                    <strong className="text-pink-300">Origin: </strong>
                     {data.character.origin.name}
                   </p>
                 )}
               {data.character.location.name &&
                 data.character.location.name !== 'unknown' && (
                   <p>
-                    <strong>Location:</strong>
+                    <strong className="text-pink-300">Location: </strong>
                     {data.character.location.name}
                   </p>
                 )}
             </div>
           </div>
-          <h4>
-            <strong>Episodes:</strong>
+          <h4 className="text-center text-2xl mt-2">
+            <strong className="text-pink-300">Episodes: </strong>
           </h4>
-          <div>
+          <ul className="flex gap-5 flex-wrap justify-center mt-2 ">
             {data.character.episode.map((episode) => (
-              <p key={episode.id}>{episode.name}</p>
+              <li
+                key={episode.id}
+                className="border border-pink-200 rounded-md p-2"
+              >
+                {episode.name}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </div>

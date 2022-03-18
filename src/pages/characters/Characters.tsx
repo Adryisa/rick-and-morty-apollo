@@ -57,7 +57,6 @@ export function Characters(): JSX.Element {
 
   return (
     <div>
-      <h2>Characters</h2>
       <SearchBar handleChange={handleChange} searchValue={searchValue.name} />
       <Selectors
         handleChange={handleChange}

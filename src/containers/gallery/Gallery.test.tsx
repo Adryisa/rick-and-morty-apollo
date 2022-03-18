@@ -137,7 +137,7 @@ describe('Given the gallery component', () => {
       );
       expect(await screen.findByText(/Rick/i)).toBeInTheDocument();
 
-      const sortButton = await screen.queryByText(/sort/i);
+      const sortButton = await screen.queryByText(/Order by name/i);
 
       fireEvent.click(sortButton);
 
