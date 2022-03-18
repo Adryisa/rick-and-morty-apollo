@@ -78,7 +78,7 @@ export function Gallery({
       {loading && (
         <img src="assets/loading-rm.png" alt="loading" className="spinning" />
       )}
-      <div className="">
+      <div>
         {error ? (
           <div className="flex justify-center gap-8 p-3">
             <img
@@ -93,7 +93,7 @@ export function Gallery({
         ) : (
           <div>
             {sortedData && (
-              <ul>
+              <ul className="flex flex-wrap justify-center gap-4 mx-6 my-8">
                 {sortedData.characters.results.map((item) => (
                   <Link to={`character/${item.id}`} key={item.id}>
                     <CharacterCard name={item.name} image={item.image} />

@@ -9,7 +9,7 @@ function App(): JSX.Element {
   return (
     <div className="App min-h-screen flex flex-col ">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main className="flex-1 flex flex-col">
         <Routes>
           <Route path="/" element={<Characters />} />
           <Route path="/character/:id" element={<CharacterDetail />} />

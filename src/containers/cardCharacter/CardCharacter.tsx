@@ -10,9 +10,9 @@ export function CharacterCard({
   image,
 }: CharacterDetailsPropsI): JSX.Element {
   return (
-    <>
-      <li>{name}</li>
-      <img src={image} alt="" />
-    </>
+    <div className="flex flex-col w-[300px]">
+      <p className="text-pink-100">{name}</p>
+      <img src={image} alt={`${name}`} />
+    </div>
   );
 }
