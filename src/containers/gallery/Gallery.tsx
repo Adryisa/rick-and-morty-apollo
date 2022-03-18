@@ -65,20 +65,23 @@ export function Gallery({
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={handleSort}
-        className="bg-pink-100 w-16 rounded-lg font-normal text-slate-900"
-      >
-        SORT
-      </button>
+      <div className="flex justify-end p-2 mr-5">
+        <button
+          type="button"
+          onClick={handleSort}
+          className="bg-pink-100 w-32 rounded-lg font-normal text-slate-900"
+        >
+          Order by name
+        </button>
+      </div>
+
       {loading && (
         <img src="assets/loading-rm.png" alt="loading" className="spinning" />
       )}
       <div className="flex">
         {error ? (
-          <div className="flex flex-col justify-self-center">
-            <img src="assets/daco-sad.png" alt="daco-sad" className="w-32" />
+          <div className="flex flex-col">
+            <img src="assets/daco-sad.png" alt="daco-sad" className="w-32 " />
             <p className="text-2xl text-white">Sorry no results</p>
           </div>
         ) : (
