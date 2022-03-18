@@ -76,7 +76,9 @@ export function Gallery({
       </div>
 
       {loading && (
-        <img src="assets/loading-rm.png" alt="loading" className="spinning" />
+        <div className="flex justify-center">
+          <img src="assets/loading-rm.png" alt="loading" className="spinning" />
+        </div>
       )}
       <div>
         {error ? (

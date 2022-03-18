@@ -15,7 +15,7 @@ export function Selectors({
   return (
     <div className="flex gap-8 p-5">
       <label htmlFor="gender" className="flex gap-2">
-        <p className="text-pink-100">Gender:</p>
+        <p className="text-pink-100 text-lg">Gender:</p>
         <select
           name="gender"
           id="gender"
@@ -31,7 +31,7 @@ export function Selectors({
         </select>
       </label>
       <label htmlFor="status" className="flex gap-2">
-        <p className="text-pink-100">Status:</p>
+        <p className="text-pink-100 text-lg">Status:</p>
         <select
           name="status"
           id="status"
